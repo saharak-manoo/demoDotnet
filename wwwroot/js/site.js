@@ -184,6 +184,13 @@ function changeTab(self) {
   $(self).addClass("active");
 }
 
+function checkedAll(id) {
+  let input = $("#" + id);
+  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.checked = input.is(":checked");
+  });
+}
+
 function getStudentsById() {
   let studentIds = [];
   document

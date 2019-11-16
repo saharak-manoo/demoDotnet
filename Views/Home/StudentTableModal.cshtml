@@ -1,7 +1,7 @@
 @model IEnumerable<demoDotnet.Models.Student>
 <table class="table">
   <tr>
-    <th class="sort" id="Select">เลือก</th>
+    <th class="sort" id="Select"><input type="checkbox" onclick="checkedAll(this.id)" id="checkedAll">เลือกทั้งหมด</th>
     <th class="sort" id="Id">ไอดี</th>
     <th class="sort" id="Name">ชื่อ</th>
     <th class="sort" id="Brithday">วันเกิด</th>
