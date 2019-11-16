@@ -14369,6 +14369,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Home/StudentTableModal.cshtml",
+      "TargetPath": "Views/Home/StudentTableModal.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views/_ViewStart.cshtml",
       "TargetPath": "Views/_ViewStart.cshtml",
       "FileKind": "mvc"

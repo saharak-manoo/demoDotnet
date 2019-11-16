@@ -7,7 +7,7 @@ function active(id) {
   $("#" + id).addClass("active");
 }
 
-function loadStudentsList(page) {
+function loadStudentsList(tableName, page) {
   id = $(".tab-slider--trigger.active").prop("id");
   sort = null;
   order = null;
@@ -26,57 +26,79 @@ function loadStudentsList(page) {
   }
 
   keyword = $("#searchStudents").val();
-  limit = parseInt($("#limit").val());
+  limit = parseInt($("#" + tableName + "-limit").val());
   if (id == "tabCard") {
     limit += 1;
   }
   offset = page == 1 ? 0 : (page - 1) * limit;
 
+  let studentIds = JSON.parse(localStorage.getItem("studentIds"));
+
   $.ajax({
-    type: "GET",
+    type: "Post",
     url: "Home/LoadStudent",
     data: {
+      tableName: tableName,
       keyword: keyword,
       limit: limit,
       offset: offset || 0,
+      studentIds: studentIds,
       sort: sort,
       order: order
     },
     dataType: "json",
     error: function(resp) {
-      $("#studentsTable").html(resp.responseText);
-      countTotal(keyword, limit, page || 1);
+      $("#" + tableName).html(resp.responseText);
+      countTotal(tableName, keyword, limit, studentIds, sort, order, page || 1);
       setIcon(sort, order);
       changeTab(tab);
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        if (
+          studentIds.includes(parseInt(checkbox.getAttribute("student-id")))
+        ) {
+          checkbox.checked = true;
+        }
+      });
     }
   });
 }
 
-function countTotal(keyword, limit, page) {
+function countTotal(tableName, keyword, limit, studentIds, sort, order, page) {
   $.ajax({
-    type: "GET",
+    type: "Post",
     url: "Home/LoadStudent",
-    data: { keyword: keyword, limit: limit, offset: 0, count: true },
+    data: {
+      tableName: tableName,
+      keyword: keyword,
+      limit: limit,
+      offset: 0,
+      studentIds: studentIds,
+      sort: sort,
+      order: order,
+      count: true
+    },
     dataType: "json",
     success: function(resp) {
-      paginationStudents(page, resp, limit);
+      paginationStudents(tableName, page, resp, limit);
     }
   });
 }
 
-function paginationStudents(pageSelected, total, limit) {
+function paginationStudents(tableName, pageSelected, total, limit) {
   page = "";
   total = Math.ceil(total / limit);
   for (var i = 0; i <= total - 1; i++) {
     page = i + 1;
     offset = page == 1 ? 0 : (page - 1) * limit;
     active = pageSelected == page ? "active" : "";
-    $("#paginationStudents").append(
+    $("#" + tableName + "-paginationStudents").append(
       '<li class="page-item ' +
         active +
         '" id="' +
         page +
-        '" ><a class="page-link cicle" onclick="loadStudentsList(' +
+        '" ><a class="page-link cicle" onclick="loadStudentsList("' +
+        tableName +
+        '", ' +
         page +
         ')" href="javascript:void(null)">' +
         page +
@@ -95,7 +117,10 @@ function removeStudent(id) {
       dataType: "json",
       success: function(resp) {
         if (resp) {
-          loadStudentsList(parseInt($(".page-item.active").prop("id")));
+          loadStudentsList(
+            "StudentsTable",
+            parseInt($(".page-item.active").prop("id"))
+          );
         }
       }
     });
@@ -110,16 +135,16 @@ function sortStudent(sort) {
     icon.removeClass("fa-sort");
     icon.addClass("fa-sort-up");
     icon.addClass("text-success");
-    loadStudentsList(page);
+    loadStudentsList("StudentsTable", page);
   } else if (icon.hasClass("fa-sort-up")) {
     resetIcon();
     icon.removeClass("fa-sort-up");
     icon.addClass("fa-sort-down");
     icon.addClass("text-success");
-    loadStudentsList(page);
+    loadStudentsList("StudentsTable", page);
   } else {
     resetIcon();
-    loadStudentsList(page);
+    loadStudentsList("StudentsTable", page);
   }
 }
 
@@ -157,4 +182,15 @@ function changeTab(self) {
   }
   $(".tab-slider--nav li").removeClass("active");
   $(self).addClass("active");
+}
+
+function getStudentsById() {
+  let studentIds = [];
+  document
+    .querySelectorAll('input[type="checkbox"]:checked')
+    .forEach(checkbox =>
+      studentIds.push(parseInt(checkbox.getAttribute("student-id")))
+    );
+
+  localStorage.setItem("studentIds", JSON.stringify(studentIds));
 }

@@ -1,0 +1,26 @@
+@model IEnumerable<demoDotnet.Models.Student>
+<table class="table">
+  <tr>
+    <th class="sort" id="Select">เลือก</th>
+    <th class="sort" id="Id">ไอดี</th>
+    <th class="sort" id="Name">ชื่อ</th>
+    <th class="sort" id="Brithday">วันเกิด</th>
+    <th class="sort" id="Status">สถานะ</th>
+    <th></th>
+  </tr>
+  @foreach (var student in Model) {
+    <tr id="allStudent">
+      <td><input type="checkbox" onclick="getStudentsById()" name="student[selected]" id="studentSelected" student-id="@student.Id" value="true"></td>
+      <td>@student.Id</td>
+      <td>@student.Name</td>
+      <td>@student.Brithday</td>
+      <td>@student.Status</td>
+    </tr>
+  }
+</table>
+
+<div class="row">
+  <div class="col-lg-11">
+    <ul class="pagination" id="StudentTableModal-paginationStudents"></ul>
+  </div>
+</div>

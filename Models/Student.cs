@@ -4,22 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
-namespace demoDotnet.Models
-{
-  public class Student
-  {
+namespace demoDotnet.Models {
+  public class Student {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [JsonProperty("id")]
+    [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
+    [JsonProperty ("id")]
     public int Id { get; set; }
 
-    [JsonProperty("name")]
+    [Required]
+    [JsonProperty ("name")]
     public string Name { get; set; }
 
-    [JsonProperty("status")]
+    [Required]
+    [JsonProperty ("status")]
     public string Status { get; set; }
 
-    [JsonProperty("brithday")]
+    [Required]
+    [JsonProperty ("brithday")]
     public DateTime Brithday { get; set; }
   }
 }

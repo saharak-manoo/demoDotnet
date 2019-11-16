@@ -32,15 +32,21 @@ namespace demoDotnet.Controllers {
       Console.WriteLine ("testString[0][0] = " + testString[0][0]);
       Console.WriteLine ("testString[1][0] = " + testString[1][0]);
 
-      return View ();
+      var students = _context.Students;
+      return View (students);
     }
 
-    public IActionResult LoadStudent (String keyword, int limit, int offset, String count, String sort, String order) {
+    [HttpPost]
+    public IActionResult LoadStudent (String tableName, String keyword, int limit, int offset, int[] studentIds, String sort, String order, String count) {
       var students = _context.Students.Where (t =>
         t.Name.Contains (keyword) ||
         t.Status.Contains (keyword));
 
       var Students = keyword == null ? _context.Students : students;
+
+      if (studentIds.Length != 0 && tableName != "StudentTableModal") {
+        Students = Students.Where (t => studentIds.Contains (t.Id));
+      }
 
       if (order == "asc") {
         if (sort == "Id") { Students = Students.OrderBy (x => x.Id); } else if (sort == "Name") { Students = Students.OrderBy (x => x.Name); } else if (sort == "Status") { Students = Students.OrderBy (x => x.Status); } else if (sort == "Brithday") { Students = Students.OrderBy (x => x.Brithday); }
@@ -49,7 +55,7 @@ namespace demoDotnet.Controllers {
       }
 
       if (count == null) {
-        return PartialView ("StudentsTable", Students.Skip (offset).Take (limit).ToList ());
+        return PartialView (tableName, Students.Skip (offset).Take (limit).ToList ());
       } else {
         return Json (Students.Count ());
       }
@@ -69,6 +75,14 @@ namespace demoDotnet.Controllers {
       }
 
       return RedirectToAction ("Index");
+    }
+
+    [HttpDelete]
+    public IActionResult Delete (int id) {
+      Student student = _context.Students.Find (id);
+      _context.Students.Remove (student);
+      _context.SaveChanges ();
+      return Json (true);
     }
 
     public IActionResult Privacy () {
