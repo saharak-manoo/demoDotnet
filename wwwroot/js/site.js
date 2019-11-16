@@ -194,3 +194,10 @@ function getStudentsById() {
 
   localStorage.setItem("studentIds", JSON.stringify(studentIds));
 }
+
+function CheckboxAll(id) {
+  let input = $("#" + id);
+  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.checked = input.is(":checked");
+  });
+}

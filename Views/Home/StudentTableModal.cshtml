@@ -1,6 +1,7 @@
 @model IEnumerable<demoDotnet.Models.Student>
 <table class="table">
   <tr>
+    <th class="sort" id="SelectAll" ><input type="checkbox" onclick="CheckboxAll(this.id)"  id="Checkall"  >เลือกทั้งหมด</th>
     <th class="sort" id="Select">เลือก</th>
     <th class="sort" id="Id">ไอดี</th>
     <th class="sort" id="Name">ชื่อ</th>
@@ -10,6 +11,7 @@
   </tr>
   @foreach (var student in Model) {
     <tr id="allStudent">
+     
       <td><input type="checkbox" onclick="getStudentsById()" name="student[selected]" id="studentSelected" student-id="@student.Id" value="true"></td>
       <td>@student.Id</td>
       <td>@student.Name</td>

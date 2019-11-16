@@ -1,5 +1,5 @@
 {
-  "FilePath": "/Users/saharak/Documents/Work/Web/demoDotnet/demoDotnet.csproj",
+  "FilePath": "/home/ryu/Documents/Work/demoDotnet/demoDotnet.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14349,18 +14349,13 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/_ViewImports.cshtml",
-      "TargetPath": "Views/_ViewImports.cshtml",
+      "FilePath": "Views/_ViewStart.cshtml",
+      "TargetPath": "Views/_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/Home/StudentsTable.cshtml",
-      "TargetPath": "Views/Home/StudentsTable.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views/Home/Privacy.cshtml",
-      "TargetPath": "Views/Home/Privacy.cshtml",
+      "FilePath": "Views/Home/New.cshtml",
+      "TargetPath": "Views/Home/New.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14369,23 +14364,28 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/Home/StudentTableModal.cshtml",
-      "TargetPath": "Views/Home/StudentTableModal.cshtml",
+      "FilePath": "Views/Home/Privacy.cshtml",
+      "TargetPath": "Views/Home/Privacy.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/_ViewStart.cshtml",
-      "TargetPath": "Views/_ViewStart.cshtml",
+      "FilePath": "Views/Home/StudentsTable.cshtml",
+      "TargetPath": "Views/Home/StudentsTable.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/Home/new.cshtml",
-      "TargetPath": "Views/Home/new.cshtml",
+      "FilePath": "Views/_ViewImports.cshtml",
+      "TargetPath": "Views/_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
       "FilePath": "Views/Shared/Error.cshtml",
       "TargetPath": "Views/Shared/Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Home/StudentTableModal.cshtml",
+      "TargetPath": "Views/Home/StudentTableModal.cshtml",
       "FileKind": "mvc"
     },
     {

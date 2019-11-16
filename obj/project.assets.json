@@ -858,23 +858,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/saharak/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "/home/ryu/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/saharak/Documents/Work/Web/demoDotnet/demoDotnet.csproj",
+      "projectUniqueName": "/home/ryu/Documents/Work/demoDotnet/demoDotnet.csproj",
       "projectName": "demoDotnet",
-      "projectPath": "/Users/saharak/Documents/Work/Web/demoDotnet/demoDotnet.csproj",
-      "packagesPath": "/Users/saharak/.nuget/packages/",
-      "outputPath": "/Users/saharak/Documents/Work/Web/demoDotnet/obj/",
+      "projectPath": "/home/ryu/Documents/Work/demoDotnet/demoDotnet.csproj",
+      "packagesPath": "/home/ryu/.nuget/packages/",
+      "outputPath": "/home/ryu/Documents/Work/demoDotnet/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/saharak/.nuget/NuGet/NuGet.Config"
+        "/home/ryu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -933,7 +929,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }
