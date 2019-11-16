@@ -3,35 +3,81 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using demoDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using demoDotnet.Models;
 
-namespace demoDotnet.Controllers
-{
-    public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
+namespace demoDotnet.Controllers {
+  public class HomeController : Controller {
+    private readonly DemoDotnetContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    public HomeController (DemoDotnetContext _context) {
+      this._context = _context;
     }
+
+    [HttpGet]
+    public IActionResult Index () {
+      string[] originalString = new string[1];
+      List<string[]> testString = new List<string[]> ();
+
+      originalString[0] = "first";
+      testString.Add (originalString);
+      originalString[0] = "second";
+      testString.Add (originalString);
+
+      foreach (var t in testString) {
+        Console.WriteLine (">>>>> {0}", t[0]);
+      }
+
+      Console.WriteLine ("testString[0][0] = " + testString[0][0]);
+      Console.WriteLine ("testString[1][0] = " + testString[1][0]);
+
+      return View ();
+    }
+
+    public IActionResult LoadStudent (String keyword, int limit, int offset, String count, String sort, String order) {
+      var students = _context.Students.Where (t =>
+        t.Name.Contains (keyword) ||
+        t.Status.Contains (keyword));
+
+      var Students = keyword == null ? _context.Students : students;
+
+      if (order == "asc") {
+        if (sort == "Id") { Students = Students.OrderBy (x => x.Id); } else if (sort == "Name") { Students = Students.OrderBy (x => x.Name); } else if (sort == "Status") { Students = Students.OrderBy (x => x.Status); } else if (sort == "Brithday") { Students = Students.OrderBy (x => x.Brithday); }
+      } else if (order == "desc") {
+        if (sort == "Id") { Students = Students.OrderByDescending (x => x.Id); } else if (sort == "Name") { Students = Students.OrderByDescending (x => x.Name); } else if (sort == "Status") { Students = Students.OrderByDescending (x => x.Status); } else if (sort == "Brithday") { Students = Students.OrderByDescending (x => x.Brithday); }
+      }
+
+      if (count == null) {
+        return PartialView ("StudentsTable", Students.Skip (offset).Take (limit).ToList ());
+      } else {
+        return Json (Students.Count ());
+      }
+    }
+
+    [HttpGet]
+    public IActionResult New () {
+      return View ();
+    }
+
+    [HttpPost]
+    public IActionResult Create (Student student) {
+      if (ModelState.IsValid) {
+        student.Brithday = DateTime.Now;
+        _context.Students.Add (student);
+        _context.SaveChanges ();
+      }
+
+      return RedirectToAction ("Index");
+    }
+
+    public IActionResult Privacy () {
+      return View ();
+    }
+
+    [ResponseCache (Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error () {
+      return View (new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+  }
 }

@@ -40,3 +40,5 @@
 /Users/saharak/Documents/Work/Web/demoDotnet/bin/Debug/netcoreapp3.0/Npgsql.dll
 /Users/saharak/Documents/Work/Web/demoDotnet/bin/Debug/netcoreapp3.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /Users/saharak/Documents/Work/Web/demoDotnet/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/saharak/Documents/Work/Web/demoDotnet/obj/Debug/netcoreapp3.0/Razor/Views/Home/new.cshtml.g.cs
+/Users/saharak/Documents/Work/Web/demoDotnet/obj/Debug/netcoreapp3.0/Razor/Views/Home/StudentsTable.cshtml.g.cs

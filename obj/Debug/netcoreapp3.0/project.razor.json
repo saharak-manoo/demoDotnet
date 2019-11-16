@@ -14354,6 +14354,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Home/StudentsTable.cshtml",
+      "TargetPath": "Views/Home/StudentsTable.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views/Home/Privacy.cshtml",
       "TargetPath": "Views/Home/Privacy.cshtml",
       "FileKind": "mvc"
@@ -14366,6 +14371,11 @@
     {
       "FilePath": "Views/_ViewStart.cshtml",
       "TargetPath": "Views/_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Home/new.cshtml",
+      "TargetPath": "Views/Home/new.cshtml",
       "FileKind": "mvc"
     },
     {

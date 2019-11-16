@@ -1,8 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
+<script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center">
+  <h1 class="display-4">Student</h1>
+   @Html.ActionLink("New", "New", "Home", null, new { @class = "btn btn-success" })
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+	<div class="search">
+		<br>
+		<input type="text" class="form-control" placeholder="Search..." id="searchStudents" onkeyup="loadStudentsList()">
+		<br>
+	<div>
+	<div class="tab-slider--nav">
+		<ul class="tab-slider--tabs">
+			<li class="tab-slider--trigger active" rel="tab1" id="tabTable">Table</li>
+			<li class="tab-slider--trigger" rel="tab2" id="tabCard">Card</li>
+		</ul>
+	</div>
+	<div class="tab-slider--container" id="studentsTable"></div>
+	<div class="row">
+		<div class="col-lg-1 pull-rigth">
+			<select class="form-control" id="limit" onchange="loadStudentsList()">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</div>
+	</div>
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    loadStudentsList();
+  });
+
+	$('.tab-slider--nav li').click(function () {
+    changeTab(this)
+		page = parseInt($('.page-item.active').prop('id'))
+		loadStudentsList(page)
+  });
+</script>
+
