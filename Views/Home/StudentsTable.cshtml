@@ -1,0 +1,49 @@
+@model IEnumerable<demoDotnet.Models.Student>
+<div id="tab1" class="tab-slider--body">
+  <table class="table">
+    <tr>
+      <th class="sort" id="Id" onclick="sortStudent(this.id)">ไอดี <i class="Id fa fa-fw fa-sort"></i></th>
+      <th class="sort" id="Name" onclick="sortStudent(this.id)">ชื่อ <i class="FirstName fa fa-fw fa-sort"></i></th>
+      <th class="sort" id="Brithday" onclick="sortStudent(this.id)">วันเกิด <i class="LastName fa fa-fw fa-sort"></i></th>
+      <th class="sort" id="Status" onclick="sortStudent(this.id)">สถานะ <i class="Status fa fa-fw fa-sort"></i></th>
+      <th></th>
+    </tr>
+    @foreach (var student in Model) {
+      <tr id="allStudent">
+        <td>@student.Id</td>
+        <td>@student.Name</td>
+        <td>@student.Brithday</td>
+        <td>@student.Status</td>
+        <td>
+          <button class="btn btn-danger" onclick="removeStudent(@student.Id)">Delete</button>
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+<div id="tab2" class="tab-slider--body" style="display: none;">
+  <div class="row py-3 pl-3">
+    @foreach (var student in Model) {
+      <div class="col-lg-4 p-3">
+        <div class="card">
+          <div class="view overlay">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">ชื่อ : @student.Name</h4>
+            <p class="card-text">ไอดี : @student.Id สถานะ : @student.Status</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-11">
+    <ul class="pagination" id="StudentsTable-paginationStudents"></ul>
+  </div>
+</div>
