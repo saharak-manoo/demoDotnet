@@ -54,7 +54,6 @@ namespace demoDotnet.Controllers {
 
     [HttpPost]
     public IActionResult LoadStudent (String tableName, String keyword, int limit, int offset, int[] studentIds, String sort, String order, String count) {
-      _context.Students.Select (x => x.Id).Join ("Classroom")
       var students = _context.Students.Where (t =>
         t.Name.Contains (keyword) ||
         t.Status.Contains (keyword));
