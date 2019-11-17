@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using demoDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace demoDotnet.Controllers {
@@ -17,6 +18,21 @@ namespace demoDotnet.Controllers {
 
     [HttpGet]
     public IActionResult Index () {
+      if (_context.Classrooms.Count () == 0) {
+        _context.Classrooms.Add (new Classroom () { Name = "CS-01" });
+        _context.Classrooms.Add (new Classroom () { Name = "CS-02" });
+        _context.Classrooms.Add (new Classroom () { Name = "CS-03" });
+        _context.Classrooms.Add (new Classroom () { Name = "CS-04" });
+        _context.Classrooms.Add (new Classroom () { Name = "CS-05" });
+        _context.SaveChanges ();
+      }
+
+      if (_context.Genders.Count () == 0) {
+        _context.Genders.Add (new Gender () { Name = "Man" });
+        _context.Genders.Add (new Gender () { Name = "Woman" });
+        _context.SaveChanges ();
+      }
+
       string[] originalString = new string[1];
       List<string[]> testString = new List<string[]> ();
 
@@ -63,16 +79,25 @@ namespace demoDotnet.Controllers {
 
     [HttpGet]
     public IActionResult New () {
-      return View ();
+      var studentData = new StudentData ();
+      studentData.Classrooms = _context.Classrooms.ToList ();
+      studentData.Genders = _context.Genders.ToList ();
+      return View (studentData);
     }
 
     [HttpPost]
-    public IActionResult Create (Student student) {
-      if (ModelState.IsValid) {
-        student.Brithday = DateTime.Now;
-        _context.Students.Add (student);
-        _context.SaveChanges ();
-      }
+    public IActionResult Create (Student studentData) {
+      Console.WriteLine (">>>>> studentData");
+      Console.WriteLine (studentData);
+      Console.WriteLine (studentData.Name);
+      // if (ModelState.IsValid) {
+      //   var student = studentData.Student;
+      //   student.Brithday = DateTime.Now;
+      //   student.Classroom = _context.Classrooms.Find (studentData.ClassroomId);
+      //   student.Gender = _context.Genders.Find (studentData.GenderId);
+      //   _context.Students.Add (student);
+      //   _context.SaveChanges ();
+      // }
 
       return RedirectToAction ("Index");
     }

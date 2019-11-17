@@ -1,4 +1,4 @@
-@model demoDotnet.Models.Student
+@model demoDotnet.Models.StudentData
 @{
   ViewData["Title"] = "New Student";
 }
@@ -10,11 +10,30 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<label>Name :</label>
-					@Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+					@Html.TextBoxFor(Model => Model.Student.Name, new { @class = "form-control" })
 				</div>
+
 				<div class="col-lg-6">
 					<label>Status :</label>
-					@Html.DropDownListFor(model => model.Status, new SelectList(new string[] {"กำลังศึกษา", "จบการศึกษา", "ลาออก"}, "กำลังศึกษา"), htmlAttributes: new { @class = "form-control" })
+					@Html.DropDownListFor(Model => Model.Student.Status, new SelectList(new string[] {"กำลังศึกษา", "จบการศึกษา", "ลาออก"}, "กำลังศึกษา"), htmlAttributes: new { @class = "form-control" })
+				</div>
+
+				<div class="col-lg-6">
+					<label>ClassRoom :</label>
+					<select class="form-control select-two" id="ClassroomId" name="ClassroomId">
+						@foreach (var classroom in Model.Classrooms) {
+							<option value="@classroom.Id">@classroom.Name</option>
+						}
+					</select>
+				</div>
+
+				<div class="col-lg-6">
+					<label>Gender :</label>
+					<select class="form-control" id="GenderId" name="GenderId">
+						@foreach (var gender in Model.Genders) {
+							<option value="@gender.Id">@gender.Name</option>
+						}
+					</select>
 				</div>
 			</div>
 			<br>
@@ -25,3 +44,9 @@
 			</div>
     }
 </div>
+
+<script>
+	$(document).ready(function() {
+		<%-- $('.select-two').select2(); --%>
+	});
+</script>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using demoDotnet.Models;
@@ -9,9 +10,10 @@ using demoDotnet.Models;
 namespace demoDotnet.Migrations
 {
     [DbContext(typeof(DemoDotnetContext))]
-    partial class DemoDotnetContextModelSnapshot : ModelSnapshot
+    [Migration("20191117041844_Gender")]
+    partial class Gender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,12 +63,6 @@ namespace demoDotnet.Migrations
                     b.Property<DateTime>("Brithday")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("ClassroomId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("GenderId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -77,26 +73,7 @@ namespace demoDotnet.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId");
-
-                    b.HasIndex("GenderId");
-
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("demoDotnet.Models.Student", b =>
-                {
-                    b.HasOne("demoDotnet.Models.Classroom", "Classroom")
-                        .WithMany()
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("demoDotnet.Models.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

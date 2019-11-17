@@ -6,5 +6,7 @@ namespace demoDotnet.Models {
     public DbSet<Student> Students { get; set; }
 
     public DbSet<Classroom> Classrooms { get; set; }
+
+    public DbSet<Gender> Genders { get; set; }
   }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace demoDotnet.Models {
-  public class Student {
+  public class Gender {
     [Key]
     [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
     [JsonProperty ("id")]
@@ -14,21 +14,5 @@ namespace demoDotnet.Models {
     [Required]
     [JsonProperty ("name")]
     public string Name { get; set; }
-
-    [Required]
-    [JsonProperty ("status")]
-    public string Status { get; set; }
-
-    [Required]
-    [JsonProperty ("brithday")]
-    public DateTime Brithday { get; set; }
-
-    [Required]
-    [JsonProperty ("classroom")]
-    public Classroom Classroom { get; set; }
-
-    [Required]
-    [JsonProperty ("gender")]
-    public Gender Gender { get; set; }
   }
 }
