@@ -20,7 +20,7 @@
 
 				<div class="col-lg-6">
 					<label>ClassRoom :</label>
-					<select class="form-control select-two" id="ClassroomId" name="ClassroomId">
+					<select class="form-control select-two" id="ClassroomId" name="classroomId">
 						@foreach (var classroom in Model.Classrooms) {
 							<option value="@classroom.Id">@classroom.Name</option>
 						}
@@ -29,7 +29,7 @@
 
 				<div class="col-lg-6">
 					<label>Gender :</label>
-					<select class="form-control" id="GenderId" name="GenderId">
+					<select class="form-control" id="GenderId" name="genderId">
 						@foreach (var gender in Model.Genders) {
 							<option value="@gender.Id">@gender.Name</option>
 						}

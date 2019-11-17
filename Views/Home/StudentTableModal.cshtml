@@ -1,4 +1,4 @@
-@model IEnumerable<demoDotnet.Models.Student>
+@model IEnumerable<demoDotnet.Models.StudentList>
 <table class="table">
   <tr>
     <th class="sort" id="Select"><input type="checkbox" onclick="checkedAll(this.id)" id="checkedAll">เลือกทั้งหมด</th>
@@ -6,7 +6,8 @@
     <th class="sort" id="Name">ชื่อ</th>
     <th class="sort" id="Brithday">วันเกิด</th>
     <th class="sort" id="Status">สถานะ</th>
-    <th></th>
+    <th class="sort" id="Classroom">ห้อง</th>
+    <th class="sort" id="Gender">เพศ</th>
   </tr>
   @foreach (var student in Model) {
     <tr id="allStudent">
@@ -15,6 +16,8 @@
       <td>@student.Name</td>
       <td>@student.Brithday</td>
       <td>@student.Status</td>
+      <td>@student.ClassroomName</td>
+      <td>@student.GenderName</td>
     </tr>
   }
 </table>

@@ -126,7 +126,15 @@ namespace demoDotnet.Controllers {
       }
 
       if (count == null) {
-        return PartialView (tableName, Students.Skip (offset).Take (limit).ToList ());
+        List<StudentList> studentList = Students.Select (s => new StudentList () {
+          Id = s.Id,
+            Name = s.Name,
+            Brithday = s.Brithday,
+            GenderName = s.Gender.Name,
+            ClassroomName = s.Classroom.Name,
+            Status = s.Status
+        }).Skip (offset).Take (limit).ToList ();
+        return PartialView (tableName, studentList);
       } else {
         return Json (Students.Count ());
       }
@@ -141,23 +149,13 @@ namespace demoDotnet.Controllers {
     }
 
     [HttpPost]
-    public IActionResult Create (Student studentData) {
-      var student = new Student ();
-      student.Name = "Test3";
-      student.Status = "กำลังศึกษา";
+    public IActionResult Create (Student student, int classroomId, int genderId) {
       student.Brithday = DateTime.Now;
-      student.Classroom = _context.Classrooms.Find (1);
-      student.Gender = _context.Genders.Find (1);
+      student.Classroom = _context.Classrooms.Find (classroomId);
+      student.Gender = _context.Genders.Find (genderId);
+
       _context.Students.Add (student);
       _context.SaveChanges ();
-      // if (ModelState.IsValid) {
-      //   var student = studentData.Student;
-      //   student.Brithday = DateTime.Now;
-      //   student.Classroom = _context.Classrooms.Find (studentData.ClassroomId);
-      //   student.Gender = _context.Genders.Find (studentData.GenderId);
-      //   _context.Students.Add (student);
-      //   _context.SaveChanges ();
-      // }
 
       return RedirectToAction ("Index");
     }

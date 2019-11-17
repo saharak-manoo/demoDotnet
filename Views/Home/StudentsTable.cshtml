@@ -1,4 +1,4 @@
-@model IEnumerable<demoDotnet.Models.Student>
+@model IEnumerable<demoDotnet.Models.StudentList>
 <div id="tab1" class="tab-slider--body">
   <table class="table">
     <tr>
@@ -6,6 +6,8 @@
       <th class="sort" id="Name" onclick="sortStudent(this.id)">ชื่อ <i class="FirstName fa fa-fw fa-sort"></i></th>
       <th class="sort" id="Brithday" onclick="sortStudent(this.id)">วันเกิด <i class="LastName fa fa-fw fa-sort"></i></th>
       <th class="sort" id="Status" onclick="sortStudent(this.id)">สถานะ <i class="Status fa fa-fw fa-sort"></i></th>
+      <th class="sort" id="Classroom">ห้อง</th>
+      <th class="sort" id="Gender">เพศ</th>
       <th></th>
     </tr>
     @foreach (var student in Model) {
@@ -14,6 +16,8 @@
         <td>@student.Name</td>
         <td>@student.Brithday</td>
         <td>@student.Status</td>
+        <td>@student.ClassroomName</td>
+        <td>@student.GenderName</td>
         <td>
           <button class="btn btn-danger" onclick="removeStudent(@student.Id)">Delete</button>
         </td>
