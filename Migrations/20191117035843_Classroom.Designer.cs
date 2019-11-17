@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using demoDotnet.Models;
@@ -9,9 +10,10 @@ using demoDotnet.Models;
 namespace demoDotnet.Migrations
 {
     [DbContext(typeof(DemoDotnetContext))]
-    partial class DemoDotnetContextModelSnapshot : ModelSnapshot
+    [Migration("20191117035843_Classroom")]
+    partial class Classroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
