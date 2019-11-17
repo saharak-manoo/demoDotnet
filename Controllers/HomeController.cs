@@ -18,6 +18,7 @@ namespace demoDotnet.Controllers {
 
     [HttpGet]
     public IActionResult Index () {
+      // create classrooms
       if (_context.Classrooms.Count () == 0) {
         _context.Classrooms.Add (new Classroom () { Name = "CS-01" });
         _context.Classrooms.Add (new Classroom () { Name = "CS-02" });
@@ -27,12 +28,14 @@ namespace demoDotnet.Controllers {
         _context.SaveChanges ();
       }
 
+      // create genders
       if (_context.Genders.Count () == 0) {
         _context.Genders.Add (new Gender () { Name = "Man" });
         _context.Genders.Add (new Gender () { Name = "Woman" });
         _context.SaveChanges ();
       }
 
+      // ข้อที่ 2
       string[] originalString = new string[1];
       List<string[]> testString = new List<string[]> ();
 
@@ -47,6 +50,8 @@ namespace demoDotnet.Controllers {
 
       Console.WriteLine ("testString[0][0] = " + testString[0][0]);
       Console.WriteLine ("testString[1][0] = " + testString[1][0]);
+
+      // ข้อที่ 3
 
       var students = _context.Students;
       return View (students);
@@ -87,9 +92,14 @@ namespace demoDotnet.Controllers {
 
     [HttpPost]
     public IActionResult Create (Student studentData) {
-      Console.WriteLine (">>>>> studentData");
-      Console.WriteLine (studentData);
-      Console.WriteLine (studentData.Name);
+      var student = new Student ();
+      student.Name = "Test";
+      student.Status = "กำลังศึกษา";
+      student.Brithday = DateTime.Now;
+      student.Classroom = _context.Classrooms.Find (1);
+      student.Gender = _context.Genders.Find (1);
+      _context.Students.Add (student);
+      _context.SaveChanges ();
       // if (ModelState.IsValid) {
       //   var student = studentData.Student;
       //   student.Brithday = DateTime.Now;
