@@ -50,8 +50,58 @@ namespace demoDotnet.Controllers {
 
       Console.WriteLine ("testString[0][0] = " + testString[0][0]);
       Console.WriteLine ("testString[1][0] = " + testString[1][0]);
+      // จบข้อที่ 2
 
-      // ข้อที่ 3
+      // ข้อที่ 3 แบบ joins table เอง
+      var datas = _context.Students
+        .Where (s => s.Status.Equals ("กำลังศึกษา"))
+        .Join (_context.Classrooms,
+          s => s.Classroom.Id,
+          c => c.Id,
+          (s, c) => new { Student = s, Classroom = c })
+        .Join (_context.Genders,
+          s => s.Student.Gender.Id,
+          g => g.Id,
+          (s, g) => new { Student = s, Gender = g })
+        .Select (select => new {
+          Id = select.Student.Student.Id,
+            Name = select.Student.Student.Name,
+            GenderName = select.Gender.Name,
+            ClassroomName = select.Student.Classroom.Name,
+            Status = select.Student.Student.Status
+        }).ToList ();
+
+      foreach (var data in datas) {
+        Console.WriteLine ("query => แบบ Joins เอง");
+        Console.WriteLine ("Id => {0}", data.Id);
+        Console.WriteLine ("Name => {0}", data.Name);
+        Console.WriteLine ("GenderName => {0}", data.GenderName);
+        Console.WriteLine ("ClassroomName => {0}", data.ClassroomName);
+        Console.WriteLine ("Status => {0}", data.Status);
+      }
+      // จบ
+
+      // ข้อที่ 3 แบบใช้ความสามารถที่ join กันใน models
+      var listStudent = _context.Students
+        .Where (s => s.Status.Equals ("กำลังศึกษา"))
+        .Select (s => new {
+          Id = s.Id,
+            Name = s.Name,
+            GenderName = s.Gender.Name,
+            ClassroomName = s.Classroom.Name,
+            Status = s.Status
+        }).ToList ();
+
+      foreach (var student in listStudent) {
+        Console.WriteLine ("query => แบบใช้ความสามารถที่ join กันใน models");
+        Console.WriteLine ("Id => {0}", student.Id);
+        Console.WriteLine ("Name => {0}", student.Name);
+        Console.WriteLine ("GenderName => {0}", student.GenderName);
+        Console.WriteLine ("ClassroomName => {0}", student.ClassroomName);
+        Console.WriteLine ("Status => {0}", student.Status);
+      }
+
+      // จบ
 
       var students = _context.Students;
       return View (students);
@@ -93,7 +143,7 @@ namespace demoDotnet.Controllers {
     [HttpPost]
     public IActionResult Create (Student studentData) {
       var student = new Student ();
-      student.Name = "Test";
+      student.Name = "Test3";
       student.Status = "กำลังศึกษา";
       student.Brithday = DateTime.Now;
       student.Classroom = _context.Classrooms.Find (1);
