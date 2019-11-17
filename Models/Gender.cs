@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace demoDotnet.Models
 {
-  public class Student
+  public class Gender
   {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,24 +16,6 @@ namespace demoDotnet.Models
     [Required]
     [JsonProperty("name")]
     public string Name { get; set; }
-
-    [Required]
-    [JsonProperty("status")]
-    public string Status { get; set; }
-
-    [Required]
-    [JsonProperty("brithday")]
-    public DateTime Brithday { get; set; }
-
-    [Required]
-    [JsonProperty("classroom")]
-    public string Classroom { get; set; }
-
-    [Required]
-    [JsonProperty("gender")]
-    public string Gender { get; set; }
-
-
 
   }
 }
