@@ -14379,8 +14379,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views/Home/new.cshtml",
-      "TargetPath": "Views/Home/new.cshtml",
+      "FilePath": "Views/Home/New.cshtml",
+      "TargetPath": "Views/Home/New.cshtml",
       "FileKind": "mvc"
     },
     {
